@@ -1,0 +1,801 @@
+/* ==========================================================================
+   ULTRA-FAST & INSTANT CLAYMORPHISM UI DESIGN SYSTEM (80ms - 120ms)
+   Features: Instant snappy interactions, zero lag, direct GPU hardware acceleration
+   ========================================================================== */
+
+/* Global Smooth Viewport */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.2rem;
+  overflow-x: hidden;
+  max-width: 100vw;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  overflow-x: hidden;
+  max-width: 100vw;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 100ms ease, color 100ms ease;
+}
+
+body.dark, html.dark body {
+  background-color: #0b1120;
+  color: #f8fafc;
+}
+
+/* 60fps / 120fps Scroll Optimization */
+#skills, #projects, #experience, #certifications {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+/* Subtle Ambient Background Lighting */
+.glow-bg {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+  transform: translateZ(0);
+}
+
+@media (max-width: 640px) {
+  .glow-bg {
+    filter: blur(80px);
+    opacity: 0.18;
+  }
+}
+
+/* Gradient Heading Effect */
+.gradient-text {
+  background: linear-gradient(135deg, #0891b2 0%, #2563eb 50%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .gradient-text {
+  background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 50%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==========================================================================
+   1. FLOATING CAPSULE ISLAND NAVIGATION (INSTANT SNAP)
+   ========================================================================== */
+
+.floating-nav-island {
+  background: #f8fafc;
+  border-radius: 9999px;
+  box-shadow: 
+    6px 6px 18px rgba(166, 178, 195, 0.35),
+    -4px -4px 14px rgba(255, 255, 255, 0.9),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.9),
+    inset -2px -2px 4px rgba(166, 178, 195, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transition: background 100ms ease, box-shadow 100ms ease;
+  user-select: none;
+  transform: translateZ(0);
+}
+
+.dark .floating-nav-island {
+  background: #151f32;
+  box-shadow: 
+    8px 8px 20px rgba(0, 0, 0, 0.55),
+    -4px -4px 12px rgba(30, 41, 59, 0.4),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.06),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Base Nav Link */
+.liquid-glass-nav-link {
+  position: relative;
+  z-index: 10;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  color: #475569;
+  font-weight: 600;
+  transition: color 90ms ease, transform 90ms ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  user-select: none;
+}
+
+.dark .liquid-glass-nav-link {
+  color: #94a3b8;
+}
+
+.liquid-glass-nav-link:hover {
+  color: #0284c7;
+}
+
+.dark .liquid-glass-nav-link:hover {
+  color: #38bdf8;
+}
+
+/* Clay Dome Icon Badge */
+.glass-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  background: #f1f5f9;
+  box-shadow: 
+    2px 2px 4px rgba(166, 178, 195, 0.3),
+    -1.5px -1.5px 3px rgba(255, 255, 255, 0.85),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.85),
+    inset -1px -1px 2px rgba(166, 178, 195, 0.15);
+  transition: transform 90ms ease, background 90ms ease, box-shadow 90ms ease;
+  flex-shrink: 0;
+  transform: translateZ(0);
+}
+
+.dark .glass-icon-wrapper {
+  background: #1e293b;
+  box-shadow: 
+    2px 2px 5px rgba(0, 0, 0, 0.4),
+    -1.5px -1.5px 4px rgba(51, 65, 85, 0.3),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.06),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* Active Dome Icon Badge */
+.nav-text-active .glass-icon-wrapper,
+.liquid-glass-nav-active .glass-icon-wrapper {
+  background: linear-gradient(135deg, #0891b2 0%, #2563eb 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 
+    2px 2px 6px rgba(0, 0, 0, 0.25),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.5),
+    inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.25) !important;
+  transform: scale(1.08) translateZ(0);
+}
+
+.dark .nav-text-active .glass-icon-wrapper,
+.dark .liquid-glass-nav-active .glass-icon-wrapper {
+  background: linear-gradient(135deg, #0284c7 0%, #3b82f6 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 
+    2px 2px 6px rgba(0, 0, 0, 0.4),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.4),
+    inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.3) !important;
+  transform: scale(1.08) translateZ(0);
+}
+
+.nav-text-active {
+  color: #0284c7 !important;
+  font-weight: 700 !important;
+}
+
+.dark .nav-text-active {
+  color: #38bdf8 !important;
+  font-weight: 700 !important;
+}
+
+.liquid-glass-nav-active {
+  background: #e0f2fe;
+  box-shadow: 
+    inset 1.5px 1.5px 4px rgba(186, 230, 253, 0.7),
+    inset -1.5px -1.5px 4px rgba(255, 255, 255, 0.85);
+  color: #0284c7 !important;
+  font-weight: 700 !important;
+}
+
+.dark .liquid-glass-nav-active {
+  background: #1e293b;
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.4),
+    inset -1.5px -1.5px 4px rgba(255, 255, 255, 0.04);
+  color: #38bdf8 !important;
+}
+
+/* Ultra-Fast 90ms Sliding Pill */
+.liquid-glass-sliding-pill {
+  position: absolute;
+  z-index: 5;
+  border-radius: 9999px;
+  background: #e2e8f0;
+  box-shadow: 
+    inset 1.5px 1.5px 3px rgba(166, 178, 195, 0.4),
+    inset -1.5px -1.5px 3px rgba(255, 255, 255, 0.85);
+  transition: 
+    transform 90ms cubic-bezier(0.1, 0.9, 0.2, 1),
+    width 90ms cubic-bezier(0.1, 0.9, 0.2, 1),
+    height 90ms cubic-bezier(0.1, 0.9, 0.2, 1),
+    opacity 70ms ease;
+  pointer-events: none;
+  will-change: transform, width, height;
+  transform: translateZ(0);
+}
+
+.dark .liquid-glass-sliding-pill {
+  background: #1e293b;
+  box-shadow: 
+    inset 1.5px 1.5px 3px rgba(0, 0, 0, 0.5),
+    inset -1.5px -1.5px 3px rgba(255, 255, 255, 0.06);
+}
+
+/* ==========================================================================
+   2. CLAY THEME TOGGLE SWITCH (100ms INSTANT SNAP)
+   ========================================================================== */
+
+.liquid-glass-track {
+  width: 58px;
+  height: 30px;
+  border-radius: 9999px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7px;
+  cursor: pointer;
+  background: #e2e8f0;
+  box-shadow: 
+    inset 2.5px 2.5px 5px rgba(166, 178, 195, 0.5),
+    inset -2.5px -2.5px 5px rgba(255, 255, 255, 0.85),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: background 100ms ease, box-shadow 100ms ease;
+  touch-action: manipulation;
+  user-select: none;
+  flex-shrink: 0;
+  transform: translateZ(0);
+}
+
+.dark .liquid-glass-track {
+  background: #0f172a;
+  box-shadow: 
+    inset 2.5px 2.5px 5px rgba(0, 0, 0, 0.7),
+    inset -1.5px -1.5px 3px rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Instant 100ms Knob */
+.liquid-glass-knob {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 
+    transform 100ms cubic-bezier(0.1, 0.9, 0.2, 1),
+    background 90ms ease,
+    box-shadow 90ms ease;
+  pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.liquid-glass-knob.knob-light {
+  transform: translate3d(0px, 0, 0);
+  background: #ffffff;
+  box-shadow: 
+    2px 2px 5px rgba(166, 178, 195, 0.45),
+    -1.5px -1.5px 4px rgba(255, 255, 255, 1),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 1),
+    inset -1.5px -1.5px 3px rgba(166, 178, 195, 0.2);
+}
+
+.liquid-glass-knob.knob-dark {
+  transform: translate3d(28px, 0, 0);
+  background: linear-gradient(135deg, #0891b2 0%, #2563eb 100%);
+  box-shadow: 
+    2px 2px 6px rgba(0, 0, 0, 0.4),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.45),
+    inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.25);
+}
+
+/* ==========================================================================
+   3. INSTANT CARDS & HOVER PHYSICS
+   ========================================================================== */
+
+.glass-card {
+  background: #f8fafc;
+  border-radius: 28px;
+  box-shadow: 
+    6px 6px 18px rgba(166, 178, 195, 0.35),
+    -6px -6px 18px rgba(255, 255, 255, 0.9),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.9),
+    inset -3px -3px 6px rgba(166, 178, 195, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: 
+    transform 90ms ease,
+    box-shadow 90ms ease,
+    opacity 90ms ease;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.dark .glass-card {
+  background: #151f32;
+  box-shadow: 
+    8px 8px 20px rgba(0, 0, 0, 0.5),
+    -4px -4px 14px rgba(30, 41, 59, 0.35),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.06),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-card:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 
+    8px 8px 22px rgba(166, 178, 195, 0.45),
+    -8px -8px 22px rgba(255, 255, 255, 0.95),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.9),
+    inset -3px -3px 6px rgba(166, 178, 195, 0.25);
+}
+
+.dark .glass-card:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 
+    10px 10px 24px rgba(0, 0, 0, 0.6),
+    -6px -6px 18px rgba(30, 41, 59, 0.45),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.08),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Instant 90ms Project Cards Transition */
+.project-card {
+  transition: 
+    opacity 90ms ease,
+    transform 90ms ease;
+  will-change: opacity, transform;
+  transform: translateZ(0);
+}
+
+/* ==========================================================================
+   4. CLAY CHIPS & BADGES
+   ========================================================================== */
+
+.glass-chip {
+  background: #f1f5f9;
+  border-radius: 18px;
+  box-shadow: 
+    3px 3px 8px rgba(166, 178, 195, 0.3),
+    -2px -2px 6px rgba(255, 255, 255, 0.85),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.85),
+    inset -1.5px -1.5px 3px rgba(166, 178, 195, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 90ms ease;
+  transform: translateZ(0);
+}
+
+.dark .glass-chip {
+  background: #1e293b;
+  box-shadow: 
+    4px 4px 10px rgba(0, 0, 0, 0.4),
+    -2px -2px 6px rgba(51, 65, 85, 0.3),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.06),
+    inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #eef2f6;
+  color: #334155;
+  box-shadow: 
+    2px 2px 5px rgba(166, 178, 195, 0.25),
+    -1.5px -1.5px 4px rgba(255, 255, 255, 0.8),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.85),
+    inset -1px -1px 2px rgba(166, 178, 195, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: all 90ms ease;
+  transform: translateZ(0);
+}
+
+.dark .tech-tag {
+  background: #1e293b;
+  color: #cbd5e1;
+  box-shadow: 
+    2px 2px 5px rgba(0, 0, 0, 0.35),
+    -1.5px -1.5px 4px rgba(51, 65, 85, 0.25),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.05),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   5. PROJECT FILTER CONTAINER
+   ========================================================================== */
+
+.project-filter-container {
+  background: #e2e8f0;
+  border-radius: 9999px;
+  padding: 0.35rem;
+  box-shadow: 
+    inset 3px 3px 6px rgba(166, 178, 195, 0.5),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.9),
+    0 2px 6px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transform: translateZ(0);
+}
+
+.dark .project-filter-container {
+  background: #0f172a;
+  box-shadow: 
+    inset 3px 3px 6px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: 
+    transform 90ms ease,
+    color 90ms ease,
+    background 90ms ease;
+  cursor: pointer;
+  border: none;
+  color: #475569;
+  background: transparent;
+  user-select: none;
+  touch-action: manipulation;
+  transform: translateZ(0);
+}
+
+.dark .filter-btn {
+  color: #94a3b8;
+}
+
+.filter-btn:hover {
+  color: #0284c7;
+}
+
+.dark .filter-btn:hover {
+  color: #38bdf8;
+}
+
+.filter-btn.active-filter {
+  background: linear-gradient(135deg, #0891b2 0%, #2563eb 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 
+    3px 3px 8px rgba(0, 0, 0, 0.25),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.25) !important;
+  transform: scale(1.02) translateZ(0);
+}
+
+.dark .filter-btn.active-filter {
+  background: linear-gradient(135deg, #0284c7 0%, #3b82f6 100%) !important;
+  box-shadow: 
+    3px 3px 8px rgba(0, 0, 0, 0.45),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ==========================================================================
+   6. INSTANT BUTTON ACTIONS & INSET INPUTS
+   ========================================================================== */
+
+.clay-btn-primary {
+  background: linear-gradient(135deg, #0891b2 0%, #2563eb 100%) !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  box-shadow: 
+    4px 4px 12px rgba(0, 0, 0, 0.2),
+    -2px -2px 8px rgba(255, 255, 255, 0.4),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.45),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  transition: 
+    transform 90ms ease,
+    box-shadow 90ms ease !important;
+  user-select: none;
+  touch-action: manipulation;
+  min-height: 44px;
+  transform: translateZ(0);
+}
+
+.dark .clay-btn-primary {
+  background: linear-gradient(135deg, #0284c7 0%, #3b82f6 100%) !important;
+  box-shadow: 
+    4px 4px 12px rgba(0, 0, 0, 0.4),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.35),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.clay-btn-primary:hover {
+  transform: translate3d(0, -2px, 0);
+  box-shadow: 
+    6px 6px 14px rgba(0, 0, 0, 0.25),
+    inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.clay-btn-primary:active {
+  transform: scale(0.97) translate3d(0, 1px, 0) !important;
+  box-shadow: 
+    2px 2px 5px rgba(0, 0, 0, 0.3),
+    inset 2.5px 2.5px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+.clay-btn-secondary {
+  background: #f8fafc !important;
+  color: #1e293b !important;
+  border-radius: 9999px !important;
+  box-shadow: 
+    5px 5px 12px rgba(166, 178, 195, 0.35),
+    -3px -3px 10px rgba(255, 255, 255, 0.9),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.9),
+    inset -1.5px -1.5px 3px rgba(166, 178, 195, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+  transition: 
+    transform 90ms ease,
+    color 90ms ease,
+    box-shadow 90ms ease !important;
+  user-select: none;
+  touch-action: manipulation;
+  min-height: 44px;
+  transform: translateZ(0);
+}
+
+.dark .clay-btn-secondary {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+  box-shadow: 
+    5px 5px 12px rgba(0, 0, 0, 0.45),
+    -3px -3px 10px rgba(51, 65, 85, 0.3),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.06),
+    inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.35) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.clay-btn-secondary:hover {
+  transform: translate3d(0, -2px, 0);
+  color: #0284c7 !important;
+}
+
+.dark .clay-btn-secondary:hover {
+  color: #38bdf8 !important;
+}
+
+.clay-btn-secondary:active {
+  transform: scale(0.97) translate3d(0, 1px, 0) !important;
+  box-shadow: 
+    inset 2px 2px 4px rgba(166, 178, 195, 0.4),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.7) !important;
+}
+
+.dark .clay-btn-secondary:active {
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Inset Inputs */
+input, textarea, select {
+  font-size: 16px !important;
+  touch-action: manipulation;
+  background: #eef2f6 !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 
+    inset 2.5px 2.5px 5px rgba(166, 178, 195, 0.4),
+    inset -2.5px -2.5px 5px rgba(255, 255, 255, 0.85) !important;
+  color: #1e293b !important;
+  transition: box-shadow 90ms ease, border-color 90ms ease;
+  transform: translateZ(0);
+}
+
+.dark input, .dark textarea, .dark select {
+  background: #0f172a !important;
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+  box-shadow: 
+    inset 2.5px 2.5px 5px rgba(0, 0, 0, 0.6),
+    inset -1.5px -1.5px 3px rgba(255, 255, 255, 0.04) !important;
+  color: #f8fafc !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none !important;
+  border-color: #0284c7 !important;
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgba(6, 182, 212, 0.25) !important;
+}
+
+.dark input:focus, .dark textarea:focus, .dark select:focus {
+  border-color: #38bdf8 !important;
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 0 2px rgba(56, 189, 248, 0.2) !important;
+}
+
+@media (min-width: 640px) {
+  input, textarea, select {
+    font-size: 0.875rem !important;
+  }
+}
+
+/* ==========================================================================
+   7. TIMELINE, MODAL & SCROLLBAR
+   ========================================================================== */
+
+.timeline-line {
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #0891b2 0%, #2563eb 50%, #4f46e5 100%);
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+@media (min-width: 768px) {
+  .timeline-line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.modal-backdrop {
+  background-color: rgba(11, 17, 32, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Optimized Global & Modal Scrollbar System */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+  transition: background 150ms ease;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0284c7;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+
+/* Modal & Project Section Custom Smooth Scrollbar (Fully Contained Inside Card) */
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #06b6d4 transparent;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 16px 0; /* Inset from rounded top & bottom corners */
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #06b6d4 0%, #2563eb 100%);
+  border-radius: 9999px;
+  border-right: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #0891b2 0%, #1d4ed8 100%);
+  background-clip: padding-box;
+}
+
+/* Mobile Drawer Animation */
+.mobile-menu-drawer {
+  transition: transform 120ms ease, opacity 100ms ease;
+  transform-origin: top;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.mobile-menu-drawer.hidden {
+  display: none;
+}
+
+/* Page Cascade Entrance Lift */
+.page-enter-header {
+  animation: enterHeader 320ms cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
+.page-enter-hero {
+  animation: enterHero 360ms cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes enterHeader {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes enterHero {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Interactive Brand & Gear Refresh Animation */
+@keyframes brandSpinRefresh {
+  0% { transform: rotate(0deg) scale(0.9); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.brand-refresh-spin {
+  animation: brandSpinRefresh 340ms cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+}
+
+/* Mechanical Gear Spin */
+@keyframes gearSpinRatcheting {
+  0% { transform: rotate(0deg) scale(0.9); }
+  60% { transform: rotate(240deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.gear-spin-anim {
+  animation: gearSpinRatcheting 420ms cubic-bezier(0.34, 1.5, 0.64, 1) forwards;
+  color: #06b6d4 !important;
+}
+
+/* Pull-Down-to-Refresh Mechanics */
+#top-gear-refresher {
+  will-change: transform, opacity;
+  transform: translate3d(-50%, -28px, 0);
+  transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 200ms ease;
+}
+
+#top-gear-refresher.pulling {
+  transition: none !important;
+}
+
+#top-gear-refresher.refreshing {
+  transform: translate3d(-50%, 42px, 0) scale(1.12) !important;
+  opacity: 1 !important;
+  box-shadow: 0 10px 25px rgba(6, 182, 212, 0.4);
+}

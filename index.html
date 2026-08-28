@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Vasanthkumar N | Mechanical Engineer & IIoT Specialist Portfolio</title>
+  <meta name="description" content="Portfolio of Vasanthkumar N - B.E. Mechanical Engineering student specializing in CAD modeling, FEA simulation (ANSYS), IIoT systems, and Digital Twins.">
+  <meta name="theme-color" content="#0b1120">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Three.js CDN for Interactive 3D Klein Bottle Viewer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Custom Claymorphism Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              cyan: '#06b6d4',
+              blue: '#2563eb',
+              darkBg: '#0b1120',
+              lightBg: '#f1f5f9'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script>
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-[#f1f5f9] dark:bg-[#0b1120] text-slate-800 dark:text-slate-100 transition-colors duration-300 font-sans antialiased selection:bg-cyan-500 selection:text-white overflow-x-hidden pt-14 sm:pt-16">
+
+  <!-- Floating Mechanical Gear Refresh Indicator (Animated on Refresh) -->
+  <div id="top-gear-refresher" class="fixed top-2.5 sm:top-3 left-1/2 -translate-x-1/2 z-[60] pointer-events-none transition-all duration-300 opacity-0 -translate-y-6 flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-full glass-chip shadow-2xl border border-cyan-500/30 bg-[#f8fafc]/95 dark:bg-[#151f32]/95 backdrop-blur-md">
+    <i id="top-gear-icon" class="fas fa-cog text-cyan-600 dark:text-cyan-400 text-sm animate-spin"></i>
+  </div>
+
+  <!-- Background Ambient Lighting (Subtle) -->
+  <div class="glow-bg bg-cyan-500/5 w-64 h-64 sm:w-96 sm:h-96 top-5 left-5 sm:top-10 sm:left-10"></div>
+  <div class="glow-bg bg-indigo-500/5 w-72 h-72 sm:w-[30rem] sm:h-[30rem] top-80 right-2 sm:top-96 sm:right-10"></div>
+
+  <!-- Floating Claymorphic Capsule Island Navigation Bar -->
+  <header id="main-header" class="fixed top-3 sm:top-5 left-0 right-0 z-50 flex justify-center pointer-events-none px-3 page-enter-header">
+    <div class="pointer-events-auto flex items-center justify-between gap-2 sm:gap-4 p-1.5 sm:p-2 rounded-full floating-nav-island max-w-full">
+      
+      <!-- Brand Logo / Avatar Tag -->
+      <a href="#" id="brand-logo-btn" class="flex items-center gap-2 pl-2 pr-1 py-1 group" title="VASANTHKUMAR N (Refresh to Top)">
+        <div id="brand-badge-icon" class="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-600 to-blue-600 flex items-center justify-center text-white font-bold text-xs shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
+          VN
+        </div>
+        <span class="hidden xl:inline-block font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 tracking-wide pr-1 whitespace-nowrap">Vasanthkumar N</span>
+      </a>
+      
+      <!-- Desktop Floating Nav Menu with Clay Sliding Active Pill -->
+      <nav id="desktop-nav-container" class="relative hidden md:flex items-center gap-0.5 sm:gap-1 text-xs sm:text-sm font-semibold">
+        <!-- Clay Fluid Sliding Active Background Pill -->
+        <div id="nav-sliding-pill" class="liquid-glass-sliding-pill opacity-0"></div>
+
+        <a href="#about" class="nav-link liquid-glass-nav-link">
+          <span class="glass-icon-wrapper"><i class="fas fa-user-circle"></i></span>
+          <span>About</span>
+        </a>
+        <a href="#skills" class="nav-link liquid-glass-nav-link">
+          <span class="glass-icon-wrapper"><i class="fas fa-tools"></i></span>
+          <span>Skills</span>
+        </a>
+        <a href="#projects" class="nav-link liquid-glass-nav-link">
+          <span class="glass-icon-wrapper"><i class="fas fa-briefcase"></i></span>
+          <span>Projects</span>
+        </a>
+        <a href="#experience" class="nav-link liquid-glass-nav-link">
+          <span class="glass-icon-wrapper"><i class="fas fa-user-tie"></i></span>
+          <span>Experience</span>
+        </a>
+        <a href="#certifications" class="nav-link liquid-glass-nav-link">
+          <span class="glass-icon-wrapper"><i class="fas fa-award"></i></span>
+          <span>Certifications</span>
+        </a>
+        <a href="#contact" class="nav-link liquid-glass-nav-link">
+          <span class="glass-icon-wrapper"><i class="fas fa-paper-plane"></i></span>
+          <span>Contact</span>
+        </a>
+      </nav>
+
+      <!-- Right Action Items: Clay Theme Toggle Switch & Resume PDF -->
+      <div class="flex items-center gap-2 pr-1">
+        <!-- Clay Theme Toggle Switch -->
+        <button id="theme-toggle" class="liquid-glass-track group" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
+          <i class="fas fa-sun text-[10px] text-amber-500 ml-0.5"></i>
+          <i class="fas fa-moon text-[10px] text-slate-400 mr-0.5"></i>
+          <!-- Clay Slider Knob -->
+          <div id="theme-toggle-knob" class="liquid-glass-knob knob-light">
+            <i id="theme-knob-icon" class="fas fa-moon text-slate-700 text-[11px]"></i>
+          </div>
+        </button>
+
+        <!-- Compact Resume CTA Button (Desktop) -->
+        <a href="Resume.pdf" download="Vasanthkumar_N_Resume.pdf" class="hidden lg:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full clay-btn-primary font-semibold text-xs transition-all">
+          <i class="fas fa-file-download text-xs"></i>
+          <span>Resume</span>
+        </a>
+
+        <!-- Mobile Touch-Optimized Hamburger Toggle -->
+        <button id="mobile-menu-btn" class="md:hidden w-8 h-8 rounded-full glass-chip flex items-center justify-center text-slate-800 dark:text-slate-200 transition-colors ml-0.5" aria-label="Open Navigation Menu">
+          <i id="mobile-menu-icon" class="fas fa-bars text-xs"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu Drawer Floating Below Capsule -->
+    <div id="mobile-menu" class="pointer-events-auto hidden md:hidden absolute top-14 left-4 right-4 bg-[#f8fafc] dark:bg-[#151f32] border border-white/60 dark:border-white/10 rounded-3xl p-3.5 space-y-1.5 mobile-menu-drawer shadow-2xl">
+      <a href="#about" class="nav-link-mobile flex items-center gap-3 text-slate-800 dark:text-slate-300 font-semibold py-2 px-3 rounded-2xl transition-all">
+        <span class="glass-icon-wrapper"><i class="fas fa-user-circle text-cyan-600 dark:text-cyan-400"></i></span>
+        <span>About</span>
+      </a>
+      <a href="#skills" class="nav-link-mobile flex items-center gap-3 text-slate-800 dark:text-slate-300 font-semibold py-2 px-3 rounded-2xl transition-all">
+        <span class="glass-icon-wrapper"><i class="fas fa-tools text-cyan-600 dark:text-cyan-400"></i></span>
+        <span>Skills</span>
+      </a>
+      <a href="#projects" class="nav-link-mobile flex items-center gap-3 text-slate-800 dark:text-slate-300 font-semibold py-2 px-3 rounded-2xl transition-all">
+        <span class="glass-icon-wrapper"><i class="fas fa-briefcase text-cyan-600 dark:text-cyan-400"></i></span>
+        <span>Projects</span>
+      </a>
+      <a href="#experience" class="nav-link-mobile flex items-center gap-3 text-slate-800 dark:text-slate-300 font-semibold py-2 px-3 rounded-2xl transition-all">
+        <span class="glass-icon-wrapper"><i class="fas fa-user-tie text-cyan-600 dark:text-cyan-400"></i></span>
+        <span>Experience</span>
+      </a>
+      <a href="#certifications" class="nav-link-mobile flex items-center gap-3 text-slate-800 dark:text-slate-300 font-semibold py-2 px-3 rounded-2xl transition-all">
+        <span class="glass-icon-wrapper"><i class="fas fa-award text-cyan-600 dark:text-cyan-400"></i></span>
+        <span>Certifications</span>
+      </a>
+      <a href="#contact" class="nav-link-mobile flex items-center gap-3 text-slate-800 dark:text-slate-300 font-semibold py-2 px-3 rounded-2xl transition-all">
+        <span class="glass-icon-wrapper"><i class="fas fa-paper-plane text-cyan-600 dark:text-cyan-400"></i></span>
+        <span>Contact</span>
+      </a>
+      <div class="pt-2 pb-1">
+        <a href="Resume.pdf" download="Vasanthkumar_N_Resume.pdf" class="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-full clay-btn-primary font-bold text-xs">
+          <i class="fas fa-file-download"></i> Download Resume PDF
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-2 pb-8 sm:pt-4 sm:pb-12 md:pt-6 md:pb-16 overflow-hidden page-enter-hero">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        
+        <!-- Left Content -->
+        <div class="lg:col-span-7 space-y-4 sm:space-y-6 text-left">
+          
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 sm:px-4 sm:py-2 rounded-full glass-chip text-cyan-800 dark:text-cyan-400 text-xs sm:text-sm font-bold max-w-full">
+            <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-cyan-500 animate-ping flex-shrink-0"></span>
+            <span class="truncate">B.E. Mechanical Engineering (2023–2027)</span>
+          </div>
+
+          <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
+            Hi, I'm <span class="gradient-text whitespace-nowrap">VASANTHKUMAR&nbsp;N</span>
+          </h1>
+
+          <p class="text-lg sm:text-2xl text-slate-700 dark:text-slate-300 font-bold leading-snug">
+            Mechanical Engineer specializing in <span class="text-cyan-600 dark:text-cyan-400 font-extrabold">CAD Modeling</span>, <span class="text-blue-600 dark:text-blue-400 font-extrabold">ANSYS FEA</span>, and <span class="text-indigo-600 dark:text-indigo-400 font-extrabold">IIoT Digital Twins</span>.
+          </p>
+
+          <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed max-w-2xl font-medium">
+            Combining 3D design, finite element analysis, sensor telemetry, and machine learning to build intelligent mechanical products and predictive maintenance frameworks.
+          </p>
+
+          <!-- Quick Contact Pill Links -->
+          <div class="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 pt-1">
+            <div class="flex items-center gap-2.5 glass-chip px-3.5 py-2.5 rounded-xl min-w-0">
+              <i class="fas fa-envelope text-cyan-600 dark:text-cyan-400 flex-shrink-0"></i>
+              <a href="mailto:vasanthkumar19102005@gmail.com" class="hover:text-cyan-600 font-semibold truncate">vasanthkumar19102005@gmail.com</a>
+            </div>
+            <div class="flex items-center gap-2.5 glass-chip px-3.5 py-2.5 rounded-xl min-w-0">
+              <i class="fas fa-phone text-cyan-600 dark:text-cyan-400 flex-shrink-0"></i>
+              <a href="tel:+916369797334" class="hover:text-cyan-600 font-semibold">+91 6369797334</a>
+            </div>
+            <div class="flex items-center gap-2.5 glass-chip px-3.5 py-2.5 rounded-xl min-w-0">
+              <i class="fas fa-map-marker-alt text-cyan-600 dark:text-cyan-400 flex-shrink-0"></i>
+              <span class="font-semibold">Madurai, Tamil Nadu</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right 3D Interactive Classic Klein Bottle Canvas Box -->
+        <div class="lg:col-span-5 relative flex justify-center mt-4 lg:mt-0">
+          <div class="w-full max-w-md rounded-3xl glass-card p-4 sm:p-6 relative overflow-hidden">
+            
+            <!-- Canvas Header -->
+            <div class="flex justify-between items-center mb-3 px-1">
+              <span class="tech-tag text-[11px] sm:text-xs"><i class="fas fa-flask text-cyan-600 dark:text-cyan-400"></i> Klein Manifold</span>
+              <button id="toggle-wireframe" class="text-xs px-3.5 py-1.5 rounded-full clay-btn-primary font-bold transition-all flex items-center gap-1.5 cursor-pointer">
+                <i class="fas fa-vector-square"></i> <span>Toggle Wireframe</span>
+              </button>
+            </div>
+
+            <!-- 3D Canvas Container -->
+            <div id="cad-canvas-container" class="w-full h-64 sm:h-80 md:h-84 rounded-2xl bg-[#e2e8f0]/80 dark:bg-[#0f172a]/90 relative overflow-hidden flex items-center justify-center cursor-grab active:cursor-grabbing touch-pan-x shadow-inner">
+              <div class="absolute top-3 left-3 text-[10px] text-slate-700 dark:text-slate-300 font-mono font-bold pointer-events-none bg-white/90 dark:bg-slate-900/90 px-2.5 py-1 rounded-full shadow-sm">
+                <span class="text-cyan-600 dark:text-cyan-400">● 3D Interactive</span> | Drag to rotate
+              </div>
+            </div>
+
+            <!-- Klein Bottle Description Box -->
+            <div class="mt-3.5 p-3.5 glass-chip rounded-2xl text-xs leading-relaxed space-y-1.5">
+              <div class="font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2 text-xs sm:text-sm">
+                <i class="fas fa-info-circle text-cyan-600 dark:text-cyan-400"></i>
+                <span>What is a Klein Bottle?</span>
+              </div>
+              <p class="text-slate-700 dark:text-slate-300 text-[11px] sm:text-xs leading-relaxed">
+                A <strong>Klein Bottle</strong> is an iconic 3D mathematical surface with <strong>no interior or exterior boundaries</strong>—its neck loops through its own body to connect back to the base!
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="scroll-mt-24 sm:scroll-mt-28 pt-10 pb-16 sm:pt-14 sm:pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center mb-8 sm:mb-12">
+        
+        <!-- Left: Mission Statement -->
+        <div class="lg:col-span-6 space-y-3 sm:space-y-4">
+          <span class="text-xs uppercase tracking-widest font-extrabold text-cyan-600 dark:text-cyan-400">Engineering Philosophy</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 leading-tight">
+            Bridging <span class="gradient-text">Physical CAD</span> & <span class="gradient-text">Digital Intelligence</span>.
+          </h2>
+          <p class="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed font-medium">
+            I am a B.E. Mechanical Engineering student at Kamaraj College of Engineering & Technology (Class of 2027). My work converges classical 3D CAD modeling and ANSYS FEA simulation with modern Industry 4.0 IoT telemetry and machine learning.
+          </p>
+        </div>
+
+        <!-- Right: 4 High-Impact Metric Cards -->
+        <div class="lg:col-span-6 grid grid-cols-2 gap-3 sm:gap-4">
+          <div class="p-4 sm:p-5 rounded-3xl glass-card flex items-center gap-3 sm:gap-4">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-lg sm:text-xl font-extrabold flex-shrink-0 shadow-inner">4+</div>
+            <div class="min-w-0">
+              <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 truncate">Projects</div>
+              <div class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 truncate">CAD & IIoT</div>
+            </div>
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-3xl glass-card flex items-center gap-3 sm:gap-4">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-lg sm:text-xl font-extrabold flex-shrink-0 shadow-inner">3+</div>
+            <div class="min-w-0">
+              <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 truncate">Core Domains</div>
+              <div class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 truncate">CAD, FEA & IIoT</div>
+            </div>
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-3xl glass-card flex items-center gap-3 sm:gap-4">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg sm:text-xl font-extrabold flex-shrink-0 shadow-inner">6+</div>
+            <div class="min-w-0">
+              <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 truncate">Certifications</div>
+              <div class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 truncate">NPTEL Elite, Creo</div>
+            </div>
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-3xl glass-card flex items-center gap-3 sm:gap-4">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center text-lg sm:text-xl font-extrabold flex-shrink-0 shadow-inner">2027</div>
+            <div class="min-w-0">
+              <div class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 truncate">Graduation</div>
+              <div class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 truncate">KCET College</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 3 Core Pillars -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+        
+        <div class="p-6 sm:p-7 rounded-3xl glass-card space-y-2.5">
+          <div class="text-xs font-extrabold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider">01. Precision Design</div>
+          <h3 class="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base">3D CAD & FEA Simulation</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">Modeling parametric assemblies in Creo, Fusion 360 & CATIA V5, validated with ANSYS thermal and static structural stress analysis.</p>
+        </div>
+
+        <div class="p-6 sm:p-7 rounded-3xl glass-card space-y-2.5">
+          <div class="text-xs font-extrabold text-blue-600 dark:text-blue-400 uppercase tracking-wider">02. Smart Telemetry</div>
+          <h3 class="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base">IIoT & ML Predictive Analytics</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">Integrating ESP8266 microcontrollers, ADXL345 vibration sensors, and Random Forest ML models to detect real-time machinery faults.</p>
+        </div>
+
+        <div class="p-6 sm:p-7 rounded-3xl glass-card space-y-2.5">
+          <div class="text-xs font-extrabold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">03. Digital Twins</div>
+          <h3 class="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base">3D Unity & MSME Innovation</h3>
+          <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">Developing real-time synchronized 3D Unity dashboards to bring affordable Industry 4.0 predictive maintenance to manufacturing MSMEs.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Technical Skills Section -->
+  <section id="skills" class="scroll-mt-24 sm:scroll-mt-28 pt-10 pb-16 sm:pt-14 sm:pb-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-2 sm:space-y-3">
+        <h2 class="text-xs uppercase tracking-widest font-extrabold text-cyan-600 dark:text-cyan-400">Technical Expertise</h2>
+        <h3 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100">Engineering & Software Skills</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-base font-medium">Comprehensive toolkit spanning 3D CAD modeling, FEA simulation, industrial IoT telemetry, and modern manufacturing.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
+        
+        <!-- Skill Card 1: CAD Software -->
+        <div class="glass-card p-6 sm:p-7 rounded-3xl space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-2xl shadow-inner">
+            <i class="fas fa-cube"></i>
+          </div>
+          <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">CAD Software</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">3D parametric modeling, assembly design, surface modeling, and 2D drafting.</p>
+          <div class="space-y-2 pt-1">
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">AutoCAD (2D Drafting)</span>
+              <span class="tech-tag text-[10px]">Advanced</span>
+            </div>
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">PTC Creo (3D CAD)</span>
+              <span class="tech-tag text-[10px]">Certified</span>
+            </div>
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">Autodesk Fusion 360</span>
+              <span class="tech-tag text-[10px]">Advanced</span>
+            </div>
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">CATIA V5</span>
+              <span class="tech-tag text-[10px]">Certified</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Card 2: FEA & Simulation -->
+        <div class="glass-card p-6 sm:p-7 rounded-3xl space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400 text-2xl shadow-inner">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">Simulation & FEA</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Structural, thermal, dynamic, and modal boundary condition simulation.</p>
+          <div class="space-y-2 pt-1">
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">ANSYS Static Structural</span>
+              <span class="tech-tag text-[10px]">Proficient</span>
+            </div>
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">ANSYS Steady / Thermal</span>
+              <span class="tech-tag text-[10px]">Proficient</span>
+            </div>
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">ANSYS Modal Analysis</span>
+              <span class="tech-tag text-[10px]">Proficient</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Card 3: IIoT & Smart Systems -->
+        <div class="glass-card p-6 sm:p-7 rounded-3xl space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-2xl shadow-inner">
+            <i class="fas fa-wifi"></i>
+          </div>
+          <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">IIoT & Digital Twins</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Sensor hardware telemetry, cloud databases, ML prediction, and 3D visualization.</p>
+          <div class="space-y-2 pt-1">
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">ESP8266 Microcontrollers</span>
+              <span class="tech-tag text-[10px]">Hands-on</span>
+            </div>
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">ADXL345 & DS18B20</span>
+              <span class="tech-tag text-[10px]">Telemetry</span>
+            </div>
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">Random Forest ML</span>
+              <span class="tech-tag text-[10px]">Python</span>
+            </div>
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">Firebase & Unity 3D</span>
+              <span class="tech-tag text-[10px]">Integration</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Card 4: Manufacturing & Quality -->
+        <div class="glass-card p-6 sm:p-7 rounded-3xl space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-2xl shadow-inner">
+            <i class="fas fa-industry"></i>
+          </div>
+          <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">Manufacturing & QC</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Production planning, CNC G-code programming, and geometric dimensioning.</p>
+          <div class="space-y-2 pt-1">
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">CNC Programming</span>
+              <span class="tech-tag text-[10px]">NTTF Certified</span>
+            </div>
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">GD&T Tolerancing</span>
+              <span class="tech-tag text-[10px]">Applied</span>
+            </div>
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">Metrology & Inspection</span>
+              <span class="tech-tag text-[10px]">Applied</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Card 5: 3D & Creative Media -->
+        <div class="glass-card p-6 sm:p-7 rounded-3xl space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-600 dark:text-purple-400 text-2xl shadow-inner">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">3D Rendering & Media</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Product rendering, animation, asset modeling, and video production.</p>
+          <div class="space-y-2 pt-1">
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">Blender (3D Render)</span>
+              <span class="tech-tag text-[10px]">Intermediate</span>
+            </div>
+            <div class="flex justify-between items-center text-xs sm:text-sm font-semibold">
+              <span class="text-slate-800 dark:text-slate-200">DaVinci Resolve</span>
+              <span class="tech-tag text-[10px]">Intermediate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill Card 6: Soft Skills & Methodology -->
+        <div class="glass-card p-6 sm:p-7 rounded-3xl space-y-4">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-400 text-2xl shadow-inner">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">Core Strengths</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Problem solving, collaborative design, and product lifecycle development.</p>
+          <div class="flex flex-wrap gap-2 pt-1">
+            <span class="tech-tag"><i class="fas fa-check"></i> Problem Solving</span>
+            <span class="tech-tag"><i class="fas fa-check"></i> Creative Thinking</span>
+            <span class="tech-tag"><i class="fas fa-check"></i> Team Collaboration</span>
+            <span class="tech-tag"><i class="fas fa-check"></i> 3D Part Modeling</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section id="projects" class="scroll-mt-24 sm:scroll-mt-28 pt-10 pb-16 sm:pt-14 sm:pb-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-10 space-y-2 sm:space-y-3">
+        <h2 class="text-xs uppercase tracking-widest font-extrabold text-cyan-600 dark:text-cyan-400">Portfolio Showcase</h2>
+        <h3 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100">Engineering & IIoT Projects</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-base font-medium">Explore key projects showcasing mechanical design, FEA validation, IIoT telemetry, and physical prototyping.</p>
+      </div>
+
+      <!-- Clay Project Filter Menu -->
+      <div class="flex justify-center mb-8 sm:mb-12">
+        <div class="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 rounded-full project-filter-container max-w-full">
+          <button class="filter-btn active-filter" data-filter="all">
+            <i class="fas fa-th-large text-xs"></i>
+            <span>All</span>
+          </button>
+          <button class="filter-btn" data-filter="cad-fea">
+            <i class="fas fa-cube text-xs"></i>
+            <span>CAD & FEA</span>
+          </button>
+          <button class="filter-btn" data-filter="iiot">
+            <i class="fas fa-wifi text-xs"></i>
+            <span>IIoT & Twins</span>
+          </button>
+          <button class="filter-btn" data-filter="industrial">
+            <i class="fas fa-industry text-xs"></i>
+            <span>Industrial</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        
+        <!-- Project 1: Digital Twin -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between group" data-category="iiot">
+          <div>
+            <!-- Project Image Preview Banner -->
+            <div class="relative h-48 sm:h-52 w-full overflow-hidden rounded-t-3xl bg-slate-900/10">
+              <img src="assets/projects/digital_twin.jpg" alt="Digital Twin-Based Predictive Maintenance System" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+              <div class="absolute top-3.5 left-3.5 flex gap-2">
+                <span class="px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-cyan-300 text-[11px] font-bold shadow-md">Capstone Project (2027)</span>
+              </div>
+              <div class="absolute top-3.5 right-3.5">
+                <span class="px-2.5 py-1 rounded-full bg-cyan-500/90 text-white text-[10px] font-mono font-bold shadow-md">Ongoing</span>
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-7 space-y-3">
+              <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors leading-snug">
+                Digital Twin-Based Predictive Maintenance System
+              </h4>
+
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
+                Developed a Digital Twin framework integrating ANSYS FEA, ESP8266 IoT, Firebase cloud database, Unity 3D visualization, and Machine Learning for real-time health monitoring of rotating machinery.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="tech-tag">ANSYS FEA</span>
+                <span class="tech-tag">ESP8266</span>
+                <span class="tech-tag">Firebase</span>
+                <span class="tech-tag">Unity 3D</span>
+                <span class="tech-tag">Random Forest ML</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="px-6 py-4 glass-chip rounded-b-3xl flex justify-between items-center border-t border-slate-200/50 dark:border-slate-800/50">
+            <span class="text-[11px] sm:text-xs font-bold text-slate-600 dark:text-slate-400 truncate mr-2">MSME Smart Manufacturing</span>
+            <button class="open-modal text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 font-bold text-xs sm:text-sm flex items-center gap-1.5 flex-shrink-0" data-project="digital-twin">
+              <span>View Details</span>
+              <i class="fas fa-chevron-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 2: Compact Heat Recovery System -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between group" data-category="cad-fea">
+          <div>
+            <!-- Project Image Preview Banner -->
+            <div class="relative h-48 sm:h-52 w-full overflow-hidden rounded-t-3xl bg-slate-900/10">
+              <img src="assets/projects/heat_exchanger.jpg" alt="Design & Fabrication of Compact Heat Recovery System" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+              <div class="absolute top-3.5 left-3.5 flex gap-2">
+                <span class="px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-blue-300 text-[11px] font-bold shadow-md">Design Project (2024–25)</span>
+              </div>
+              <div class="absolute top-3.5 right-3.5">
+                <span class="px-2.5 py-1 rounded-full bg-blue-500/90 text-white text-[10px] font-mono font-bold shadow-md">Completed</span>
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-7 space-y-3">
+              <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors leading-snug">
+                Design & Fabrication of Compact Heat Recovery System
+              </h4>
+
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
+                Designed a shell-and-helical-coil heat exchanger in Fusion 360, performed thermal and structural stress analysis in ANSYS Workbench, and fabricated a working physical prototype to measure heat transfer effectiveness.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="tech-tag">Fusion 360</span>
+                <span class="tech-tag">ANSYS Workbench</span>
+                <span class="tech-tag">Thermal Analysis</span>
+                <span class="tech-tag">Fabrication</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="px-6 py-4 glass-chip rounded-b-3xl flex justify-between items-center border-t border-slate-200/50 dark:border-slate-800/50">
+            <span class="text-[11px] sm:text-xs font-bold text-slate-600 dark:text-slate-400 truncate mr-2">Waste Heat Recovery</span>
+            <button class="open-modal text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 font-bold text-xs sm:text-sm flex items-center gap-1.5 flex-shrink-0" data-project="heat-recovery">
+              <span>View Details</span>
+              <i class="fas fa-chevron-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 3: IoT RFID Sewing Performance System -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between group" data-category="industrial">
+          <div>
+            <!-- Project Image Preview Banner -->
+            <div class="relative h-48 sm:h-52 w-full overflow-hidden rounded-t-3xl bg-slate-900/10">
+              <img src="assets/projects/rfid_sewing.jpg" alt="IoT / RFID Sewing Performance Tracking System" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+              <div class="absolute top-3.5 left-3.5 flex gap-2">
+                <span class="px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-indigo-300 text-[11px] font-bold shadow-md">Pentagon Apparels Unit II</span>
+              </div>
+              <div class="absolute top-3.5 right-3.5">
+                <span class="px-2.5 py-1 rounded-full bg-indigo-500/90 text-white text-[10px] font-mono font-bold shadow-md">Deploying</span>
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-7 space-y-3">
+              <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors leading-snug">
+                IoT / RFID Sewing Performance Tracking System
+              </h4>
+
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
+                Implemented an RFID shop-floor tracking system with ESP8266 modules and a live central dashboard to monitor operator sewing output, eliminate data-entry errors, and resolve bottlenecks in real time.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="tech-tag">ESP8266</span>
+                <span class="tech-tag">RFID Hardware</span>
+                <span class="tech-tag">Live Dashboard</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="px-6 py-4 glass-chip rounded-b-3xl flex justify-between items-center border-t border-slate-200/50 dark:border-slate-800/50">
+            <span class="text-[11px] sm:text-xs font-bold text-slate-600 dark:text-slate-400 truncate mr-2">Shop Floor Automation</span>
+            <button class="open-modal text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 font-bold text-xs sm:text-sm flex items-center gap-1.5 flex-shrink-0" data-project="rfid-sewing">
+              <span>View Details</span>
+              <i class="fas fa-chevron-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Project 4: Non-Newtonian Fluid Dynamic Speed Bumps -->
+        <div class="project-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between group" data-category="cad-fea">
+          <div>
+            <!-- Project Image Preview Banner -->
+            <div class="relative h-48 sm:h-52 w-full overflow-hidden rounded-t-3xl bg-slate-900/10">
+              <img src="assets/projects/speed_bump.jpg" alt="Smart Non-Newtonian Fluid Dynamic Speed Bump Cross-Section" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+              <div class="absolute top-3.5 left-3.5 flex gap-2">
+                <span class="px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-emerald-300 text-[11px] font-bold shadow-md">Thinkathon Innovation</span>
+              </div>
+              <div class="absolute top-3.5 right-3.5">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/90 text-white text-[10px] font-mono font-bold shadow-md">Concept</span>
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-7 space-y-3">
+              <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors leading-snug">
+                Smart Non-Newtonian Fluid Dynamic Speed Bump
+              </h4>
+
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
+                Engineered an adaptive speed breaker utilizing shear-thickening non-Newtonian fluid (STF) that yields smoothly under low-speed vehicle roll while instantaneously solidifying into a rigid obstacle upon high-speed impact.
+              </p>
+
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="tech-tag">Non-Newtonian Fluid</span>
+                <span class="tech-tag">Shear-Thickening (STF)</span>
+                <span class="tech-tag">Rheology Modeling</span>
+                <span class="tech-tag">Elastomer Housing</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="px-6 py-4 glass-chip rounded-b-3xl flex justify-between items-center border-t border-slate-200/50 dark:border-slate-800/50">
+            <span class="text-[11px] sm:text-xs font-bold text-slate-600 dark:text-slate-400 truncate mr-2">Smart Traffic Rheology</span>
+            <button class="open-modal text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 font-bold text-xs sm:text-sm flex items-center gap-1.5 flex-shrink-0" data-project="speed-bumps">
+              <span>View Details</span>
+              <i class="fas fa-chevron-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience & Internships Timeline Section -->
+  <section id="experience" class="scroll-mt-24 sm:scroll-mt-28 pt-10 pb-16 sm:pt-14 sm:pb-20 relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-2 sm:space-y-3">
+        <h2 class="text-xs uppercase tracking-widest font-extrabold text-cyan-600 dark:text-cyan-400">Career History</h2>
+        <h3 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100">Internships & Industrial Exposure</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-base font-medium">Hands-on experience in manufacturing paint shop operations and industrial IoT integration.</p>
+      </div>
+
+      <!-- Timeline Container -->
+      <div class="relative space-y-6 sm:space-y-8">
+        <div class="timeline-line"></div>
+
+        <!-- Timeline Item 1 -->
+        <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between">
+          <div class="w-full md:w-1/2 pr-0 md:pr-8 text-left md:text-right pl-8 md:pl-0 mb-2 md:mb-0">
+            <span class="text-[11px] sm:text-xs font-extrabold text-cyan-600 dark:text-cyan-400 uppercase">Industrial Project</span>
+            <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">Pentagon Apparels Unit II, Virudhunagar</h4>
+            <p class="text-xs font-semibold text-slate-600 dark:text-slate-400">IoT / RFID Sewing Performance Tracking</p>
+          </div>
+
+          <!-- Dot Indicator -->
+          <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 border-4 border-[#f1f5f9] dark:border-[#0b1120] flex items-center justify-center z-10 shadow-md"></div>
+
+          <div class="w-full md:w-1/2 pl-8 md:pl-8">
+            <div class="glass-card p-5 rounded-2xl space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">
+              <p>Implemented real-time operator-level output tracking using ESP8266 modules and RFID card readers. Integrated live web dashboards for supervisors to detect bottlenecks instantly.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between">
+          <div class="w-full md:w-1/2 pr-0 md:pr-8 text-left md:text-right pl-8 md:pl-0 mb-2 md:mb-0 order-1 md:order-1">
+            <div class="glass-card p-5 rounded-2xl space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium hidden md:block">
+              <p>Studied end-to-end industrial surface preparation, coating application, and curing stages. Observed quality control checkpoints for finish consistency, defect identification, and industrial safety compliance.</p>
+            </div>
+            <div class="md:hidden">
+              <span class="text-[11px] sm:text-xs font-extrabold text-blue-600 dark:text-blue-400 uppercase">Paint Shop Internship (15 Days)</span>
+              <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">Swing Setter Production Plant</h4>
+              <p class="text-xs font-semibold text-slate-600 dark:text-slate-400">Paint Shop Operations & Quality Assurance</p>
+            </div>
+          </div>
+
+          <!-- Dot Indicator -->
+          <div class="absolute left-4 md:left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 border-4 border-[#f1f5f9] dark:border-[#0b1120] flex items-center justify-center z-10 shadow-md"></div>
+
+          <div class="w-full md:w-1/2 pl-8 md:pl-8 order-2 md:order-2">
+            <div class="hidden md:block">
+              <span class="text-xs font-extrabold text-blue-600 dark:text-blue-400 uppercase">Paint Shop Internship (15 Days)</span>
+              <h4 class="text-xl font-bold text-slate-900 dark:text-slate-100">Swing Setter Production Plant</h4>
+              <p class="text-xs font-semibold text-slate-600 dark:text-slate-400">Paint Shop Operations & Quality Assurance</p>
+            </div>
+            <div class="glass-card p-5 rounded-2xl space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium md:hidden">
+              <p>Studied end-to-end industrial surface preparation, coating application, and curing stages. Observed quality control checkpoints for finish consistency, defect identification, and industrial safety compliance.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Certifications & Achievements Section -->
+  <section id="certifications" class="scroll-mt-24 sm:scroll-mt-28 pt-10 pb-16 sm:pt-14 sm:pb-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-2 sm:space-y-3">
+        <h2 class="text-xs uppercase tracking-widest font-extrabold text-cyan-600 dark:text-cyan-400">Credentials</h2>
+        <h3 class="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100">Certifications & Achievements</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-base font-medium">Validated technical competencies, symposium awards, and professional memberships.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        
+        <!-- Certifications List -->
+        <div class="glass-card p-6 sm:p-8 rounded-3xl space-y-5">
+          <div class="flex items-center gap-3 border-b border-slate-200/80 dark:border-slate-800/80 pb-4">
+            <div class="w-10 h-10 rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-xl flex-shrink-0 shadow-inner">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">Professional Certifications</h4>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-start gap-3.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-cyan-500 mt-1.5 flex-shrink-0"></div>
+              <div>
+                <h5 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-200">NPTEL Elite Certificate - Product Design & Manufacturing</h5>
+                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">IIT Kanpur / SWAYAM</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-cyan-500 mt-1.5 flex-shrink-0"></div>
+              <div>
+                <h5 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-200">Industrial Internet of Things (IIoT) Training</h5>
+                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">Hands-on Training at SASTRA University, Thanjavur</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-cyan-500 mt-1.5 flex-shrink-0"></div>
+              <div>
+                <h5 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-200">CATIA V5 Certification</h5>
+                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">Kamaraj College of Engineering & Technology</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-cyan-500 mt-1.5 flex-shrink-0"></div>
+              <div>
+                <h5 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-200">Advanced Creo (3D CAD)</h5>
+                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">Udemy Professional Certificate</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-cyan-500 mt-1.5 flex-shrink-0"></div>
+              <div>
+                <h5 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-200">CNC Programming Training</h5>
+                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">NTTF (Nettur Technical Training Foundation), Bangalore</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Awards & Honors List -->
+        <div class="glass-card p-6 sm:p-8 rounded-3xl space-y-5">
+          <div class="flex items-center gap-3 border-b border-slate-200/80 dark:border-slate-800/80 pb-4">
+            <div class="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl flex-shrink-0 shadow-inner">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <h4 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100">Awards & Memberships</h4>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-start gap-3.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></div>
+              <div>
+                <h5 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-200">2nd Prize - Technical Quiz</h5>
+                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">Yuvasakthi National Technical Symposium, NPR College</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></div>
+              <div>
+                <h5 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-200">3rd Prize - SkyForge Event</h5>
+                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">Euphoria Techno Management Meet, Kalasalingam Academy</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></div>
+              <div>
+                <h5 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-200">ISTE Student Member</h5>
+                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">Indian Society for Technical Education (SM No. 11709, 2025–2027)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Footer Section -->
+  <section id="contact" class="scroll-mt-24 sm:scroll-mt-28 pt-10 pb-16 sm:pt-14 sm:pb-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="glass-card p-6 sm:p-8 md:p-12 rounded-3xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          
+          <div class="lg:col-span-5 space-y-4 sm:space-y-6">
+            <h2 class="text-xs uppercase tracking-widest font-extrabold text-cyan-600 dark:text-cyan-400">Let's Connect</h2>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100">Get In Touch</h3>
+            <p class="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed font-medium">
+              Actively seeking early-career opportunities in <strong class="font-bold text-slate-900 dark:text-slate-100">Design Engineering</strong>, <strong class="font-bold text-slate-900 dark:text-slate-100">Manufacturing Engineering</strong>, and <strong class="font-bold text-slate-900 dark:text-slate-100">Industrial IoT / Smart Manufacturing</strong>. Open to full-time roles, internships, and technical collaborations—feel free to reach out directly or connect!
+            </p>
+
+            <div class="space-y-3 sm:space-y-4 pt-2 sm:pt-4">
+              <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-base sm:text-lg flex-shrink-0 shadow-inner">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <span class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 block">Email Address</span>
+                  <a href="mailto:vasanthkumar19102005@gmail.com" class="text-slate-900 dark:text-slate-200 hover:text-cyan-600 font-bold text-xs sm:text-sm truncate block">vasanthkumar19102005@gmail.com</a>
+                </div>
+                <button class="copy-btn p-2.5 text-slate-500 hover:text-cyan-600 dark:hover:text-cyan-400 flex-shrink-0" data-copy="vasanthkumar19102005@gmail.com" title="Copy Email" aria-label="Copy Email">
+                  <i class="far fa-copy"></i>
+                </button>
+              </div>
+
+              <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center text-base sm:text-lg flex-shrink-0 shadow-inner">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <span class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 block">Phone / WhatsApp</span>
+                  <a href="tel:+916369797334" class="text-slate-900 dark:text-slate-200 hover:text-blue-600 font-bold text-xs sm:text-sm block">+91 6369797334</a>
+                </div>
+                <button class="copy-btn p-2.5 text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 flex-shrink-0" data-copy="+916369797334" title="Copy Phone" aria-label="Copy Phone">
+                  <i class="far fa-copy"></i>
+                </button>
+              </div>
+
+              <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-base sm:text-lg flex-shrink-0 shadow-inner">
+                  <i class="fab fa-linkedin-in"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <span class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 block">LinkedIn Profile</span>
+                  <a href="https://linkedin.com/in/vasanthkumarn1910" target="_blank" class="text-slate-900 dark:text-slate-200 hover:text-indigo-600 font-bold text-xs sm:text-sm truncate block">vasanthkumarn1910</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Direct Message Form with Clay Inset Inputs -->
+          <div class="lg:col-span-7 glass-chip p-5 sm:p-7 md:p-8 rounded-3xl">
+            <div class="flex items-center justify-between mb-3 sm:mb-4">
+              <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100">Send a Direct Message</h4>
+              <a href="https://wa.me/916369797334?text=Hi%20Vasanthkumar,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!" target="_blank" class="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1.5" title="Direct WhatsApp Message">
+                <i class="fab fa-whatsapp text-sm"></i> <span>WhatsApp Quick Chat</span>
+              </a>
+            </div>
+
+            <!-- Fully Functional Contact Form (Supports Netlify Forms, Formspree & Web3Forms) -->
+            <form id="contact-form" name="contact" method="POST" data-netlify="true" class="space-y-3.5">
+              <!-- Hidden input for Netlify forms -->
+              <input type="hidden" name="form-name" value="contact">
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Your Name</label>
+                  <input type="text" id="form-name" name="name" required placeholder="John Doe" class="w-full rounded-2xl px-4 py-3 text-slate-900 dark:text-slate-100">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Your Email</label>
+                  <input type="email" id="form-email" name="email" required placeholder="john@example.com" class="w-full rounded-2xl px-4 py-3 text-slate-900 dark:text-slate-100">
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Subject</label>
+                <input type="text" id="form-subject" name="subject" required placeholder="Job Opportunity / Project Inquiry" class="w-full rounded-2xl px-4 py-3 text-slate-900 dark:text-slate-100">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1.5">Message</label>
+                <textarea id="form-message" name="message" rows="3" required placeholder="Hi Vasanthkumar, I would like to discuss..." class="w-full rounded-2xl px-4 py-3 text-slate-900 dark:text-slate-100"></textarea>
+              </div>
+
+              <!-- Form Submit Feedback Area -->
+              <div id="form-status" class="hidden text-xs font-bold p-3 rounded-2xl"></div>
+
+              <button id="form-submit-btn" type="submit" class="w-full py-3.5 rounded-full clay-btn-primary font-bold text-sm cursor-pointer flex items-center justify-center gap-2">
+                <i class="fas fa-paper-plane text-xs"></i>
+                <span id="form-btn-text">Send Message</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="mt-8 sm:mt-12 text-center text-xs font-semibold text-slate-500 dark:text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4">
+        <p>© 2027 VASANTHKUMAR N. All rights reserved.</p>
+        <p>B.E. Mechanical Engineering (2023–2027) • Kamaraj College</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Project Detail Modal -->
+  <div id="project-modal" class="fixed inset-0 modal-backdrop z-50 hidden items-center justify-center p-3 sm:p-4">
+    <!-- Outer Rounded Shell (Clips Corners Perfectly) -->
+    <div class="bg-[#f8fafc] dark:bg-[#151f32] border border-white/60 dark:border-white/10 rounded-3xl max-w-2xl w-full shadow-2xl relative overflow-hidden flex flex-col max-h-[88vh]">
+      
+      <!-- Close Button -->
+      <button id="close-modal" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full glass-chip flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white text-lg cursor-pointer shadow-md" aria-label="Close Modal">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Inner Scrollable Content with Inset Scrollbar -->
+      <div class="p-6 sm:p-8 space-y-4 sm:space-y-6 overflow-y-auto custom-scroll w-full">
+        
+        <div class="pr-8">
+          <span id="modal-category" class="text-xs font-extrabold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider block mb-1"></span>
+          <h3 id="modal-title" class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-slate-100 leading-snug"></h3>
+        </div>
+
+        <!-- Modal Project Image Banner -->
+        <div id="modal-image-container" class="w-full h-48 sm:h-64 rounded-2xl overflow-hidden shadow-md hidden">
+          <img id="modal-image" src="" alt="Project Visual Preview" class="w-full h-full object-cover">
+        </div>
+
+        <div id="modal-tags" class="flex flex-wrap gap-2"></div>
+
+        <div id="modal-description" class="text-xs sm:text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-medium"></div>
+
+        <div class="pt-3 sm:pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-end">
+          <button onclick="document.getElementById('close-modal').click()" class="w-full sm:w-auto px-6 py-2.5 rounded-full clay-btn-secondary font-bold text-sm cursor-pointer">
+            Close Window
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
