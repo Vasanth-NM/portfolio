@@ -917,10 +917,13 @@
               </a>
             </div>
 
-            <!-- Fully Functional Contact Form (Supports Netlify Forms, Formspree & Web3Forms) -->
-            <form id="contact-form" name="contact" method="POST" data-netlify="true" class="space-y-3.5">
-              <!-- Hidden input for Netlify forms -->
-              <input type="hidden" name="form-name" value="contact">
+            <!-- Fully Functional Contact Form (FormSubmit.co API - Zero-Config for GitHub Pages) -->
+            <form id="contact-form" action="https://formsubmit.co/ajax/vasanthkumar19102005@gmail.com" method="POST" class="space-y-3.5">
+              <!-- Custom Subject, Template & Anti-Spam for FormSubmit -->
+              <input type="hidden" name="_subject" value="New Message from Portfolio Website!">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="text" name="_honey" style="display:none">
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
@@ -942,7 +945,7 @@
               </div>
 
               <!-- Form Submit Feedback Area -->
-              <div id="form-status" class="hidden text-xs font-bold p-3 rounded-2xl"></div>
+              <div id="form-status" class="hidden text-xs font-bold p-3.5 rounded-2xl"></div>
 
               <button id="form-submit-btn" type="submit" class="w-full py-3.5 rounded-full clay-btn-primary font-bold text-sm cursor-pointer flex items-center justify-center gap-2">
                 <i class="fas fa-paper-plane text-xs"></i>
