@@ -702,22 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      // 1. Dispatch Instant Mobile Push Notification via ntfy.sh (Dual Channels)
-      const ntfyBody = `👤 Name: ${name}\n📧 Email: ${email}\n📋 Subject: ${subject}\n\n💬 Message:\n${message}`;
-      
-      // Primary Topic: vasanth_portfolio_2027
-      fetch(`https://ntfy.sh/vasanth_portfolio_2027?title=${encodeURIComponent('💼 New Portfolio Message: ' + name)}&priority=high&tags=briefcase,bell`, {
-        method: 'POST',
-        body: ntfyBody
-      }).catch(() => {});
-
-      // Secondary Topic: vasanth_portfolio_alerts_2027
-      fetch(`https://ntfy.sh/vasanth_portfolio_alerts_2027?title=${encodeURIComponent('💼 New Portfolio Message: ' + name)}&priority=high&tags=briefcase,bell`, {
-        method: 'POST',
-        body: ntfyBody
-      }).catch(() => {});
-
-      // 2. Deliver Email via FormSubmit
+      // Deliver Email directly via FormSubmit
       const payload = {
         name: name,
         email: email,
