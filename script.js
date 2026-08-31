@@ -679,16 +679,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const formBtnText = document.getElementById('form-btn-text');
   const formStatus = document.getElementById('form-status');
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  // Check if returning from FormSubmit confirmation
+  if (window.location.search.includes('submitted=true')) {
+    if (formStatus) {
+      formStatus.className = 'block p-3.5 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold text-center shadow-inner';
+      formStatus.innerHTML = '<i class="fas fa-check-circle mr-1.5"></i> Thank you! Your message has been sent successfully. I will get back to you shortly.';
+      formStatus.classList.remove('hidden');
+      setTimeout(() => formStatus.classList.add('hidden'), 6000);
+    }
+    showToast('Thank you! Your message was sent successfully.');
+  }
 
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
       const name = document.getElementById('form-name')?.value.trim();
       const email = document.getElementById('form-email')?.value.trim();
-      const subject = document.getElementById('form-subject')?.value.trim();
       const message = document.getElementById('form-message')?.value.trim();
 
       if (!name || !email || !message) {
+        e.preventDefault();
         showFormFeedback(false, 'Please fill in all required fields.');
         return;
       }
@@ -697,37 +706,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formSubmitBtn.disabled = true;
         if (formBtnText) formBtnText.textContent = 'Sending Message...';
       }
-
-      try {
-        const formData = new FormData(contactForm);
-        const endpoint = contactForm.getAttribute('action') || 'https://formsubmit.co/ajax/vasanthkumar19102005@gmail.com';
-
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json'
-          },
-          body: formData
-        });
-
-        const result = await response.json().catch(() => ({ success: response.ok }));
-
-        if (response.ok || result.success === 'true' || result.success === true) {
-          showFormFeedback(true, 'Thank you! Your message has been sent successfully. I will get back to you shortly.');
-          contactForm.reset();
-        } else {
-          showFormFeedback(false, result.message || 'Something went wrong. Please reach out directly to vasanthkumar19102005@gmail.com');
-        }
-      } catch (error) {
-        // Direct fallback: submit natively or show friendly confirmation
-        showFormFeedback(true, 'Thank you! Your message has been received.');
-        contactForm.reset();
-      } finally {
-        if (formSubmitBtn) {
-          formSubmitBtn.disabled = false;
-          if (formBtnText) formBtnText.textContent = 'Send Message';
-        }
-      }
+      // Form submits natively to FormSubmit.co, guaranteeing activation email & delivery!
     });
 
     function showFormFeedback(isSuccess, messageText) {
