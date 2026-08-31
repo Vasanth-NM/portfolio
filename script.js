@@ -702,6 +702,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
+      // 1. Dispatch Instant Mobile Push Notification via ntfy.sh (Option 1)
+      fetch('https://ntfy.sh/vasanth_portfolio_alerts_2027', {
+        method: 'POST',
+        headers: {
+          'Title': `💼 New Message from ${name}`,
+          'Priority': 'high',
+          'Tags': 'briefcase,bell,sparkles',
+          'Click': `mailto:${email}`
+        },
+        body: `👤 Name: ${name}\n📧 Email: ${email}\n📋 Subject: ${subject}\n\n💬 Message:\n${message}`
+      }).catch(() => {});
+
+      // 2. Deliver Email via FormSubmit
       const payload = {
         name: name,
         email: email,
