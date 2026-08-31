@@ -442,12 +442,12 @@ body.dark, html.dark body {
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Liquid Glass Active State (Exact Match with Top Navbar Active Item) */
+/* Liquid Glass Active State (Exact Match with Image 2) */
 .filter-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.9rem;
+  padding: 0.35rem 0.95rem;
   border-radius: 9999px;
   font-weight: 600;
   font-size: 0.8125rem;
@@ -473,13 +473,14 @@ body.dark, html.dark body {
   color: #38bdf8;
 }
 
+/* Recessed Inset Background for Active Button */
 .filter-btn.active-filter {
   background: #e2e8f0 !important;
   color: #0284c7 !important;
   font-weight: 700 !important;
   box-shadow: 
-    inset 1.5px 1.5px 3.5px rgba(166, 178, 195, 0.45),
-    inset -1.5px -1.5px 3.5px rgba(255, 255, 255, 0.9) !important;
+    inset 2px 2px 4px rgba(166, 178, 195, 0.5),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.95) !important;
   border: none !important;
 }
 
@@ -488,11 +489,12 @@ body.dark, html.dark body {
   color: #38bdf8 !important;
   font-weight: 700 !important;
   box-shadow: 
-    inset 2px 2px 4px rgba(0, 0, 0, 0.5),
-    inset -1.5px -1.5px 4px rgba(255, 255, 255, 0.04) !important;
+    inset 2px 2px 4px rgba(0, 0, 0, 0.55),
+    inset -1.5px -1.5px 4px rgba(255, 255, 255, 0.05) !important;
   border: none !important;
 }
 
+/* Default Inactive Icon Dome */
 .filter-btn .glass-icon-wrapper {
   display: inline-flex;
   align-items: center;
@@ -500,14 +502,14 @@ body.dark, html.dark body {
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 9999px;
-  background: #f1f5f9;
+  background: #ffffff;
   box-shadow: 
     2px 2px 4px rgba(166, 178, 195, 0.3),
-    -1.5px -1.5px 3px rgba(255, 255, 255, 0.85),
-    inset 1px 1px 2px rgba(255, 255, 255, 0.85),
-    inset -1px -1px 2px rgba(166, 178, 195, 0.15);
+    -1.5px -1.5px 3px rgba(255, 255, 255, 0.9),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.9),
+    inset -1px -1px 2px rgba(166, 178, 195, 0.12);
   font-size: 0.75rem;
-  color: #64748b;
+  color: #475569;
   flex-shrink: 0;
   transition: transform 90ms ease, background 90ms ease, box-shadow 90ms ease;
   transform: translateZ(0);
@@ -523,6 +525,7 @@ body.dark, html.dark body {
   color: #94a3b8;
 }
 
+/* 3D Blue Elevated Dome for Active State */
 .filter-btn.active-filter .glass-icon-wrapper {
   width: 1.85rem;
   height: 1.85rem;
@@ -532,7 +535,7 @@ body.dark, html.dark body {
     2px 2px 6px rgba(0, 0, 0, 0.25),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.5),
     inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.25) !important;
-  transform: scale(1.05) translateZ(0);
+  transform: scale(1.06) translateZ(0);
 }
 
 .dark .filter-btn.active-filter .glass-icon-wrapper {
@@ -544,7 +547,7 @@ body.dark, html.dark body {
     2px 2px 6px rgba(0, 0, 0, 0.4),
     inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.4),
     inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.3) !important;
-  transform: scale(1.05) translateZ(0);
+  transform: scale(1.06) translateZ(0);
 }
 
 /* ==========================================================================
