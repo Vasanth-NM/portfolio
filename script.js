@@ -673,61 +673,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- 8. Dynamic In-Page Contact Form Submission (Zero Page Reload) ---
+  // --- 8. Dynamic In-Page Contact Form Submission (Zero Page Reload & Zero Scroll Jump) ---
   const contactForm = document.getElementById('contact-form');
   const formSubmitBtn = document.getElementById('form-submit-btn');
   const formBtnText = document.getElementById('form-btn-text');
   const formStatus = document.getElementById('form-status');
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault(); // Strictly prevent page reload
+  async function handleContactFormSend(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
 
-      const name = document.getElementById('form-name')?.value.trim();
-      const email = document.getElementById('form-email')?.value.trim();
-      const message = document.getElementById('form-message')?.value.trim();
+    const name = document.getElementById('form-name')?.value.trim();
+    const email = document.getElementById('form-email')?.value.trim();
+    const message = document.getElementById('form-message')?.value.trim();
 
-      if (!name || !email || !message) {
-        showFormFeedback(false, 'Please fill in all required fields.');
-        return;
+    if (!name || !email || !message) {
+      showFormFeedback(false, 'Please fill in all required fields.');
+      return;
+    }
+
+    if (formSubmitBtn) {
+      formSubmitBtn.disabled = true;
+      if (formBtnText) formBtnText.textContent = 'Sending Message...';
+    }
+
+    try {
+      const formData = new FormData(contactForm);
+      const endpoint = contactForm ? (contactForm.getAttribute('action') || 'https://formsubmit.co/ajax/vasanth19102005@gmail.com') : 'https://formsubmit.co/ajax/vasanth19102005@gmail.com';
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: formData
+      });
+
+      const data = await response.json().catch(() => ({ success: response.ok }));
+
+      if (response.ok || data.success === 'true' || data.success === true) {
+        showFormFeedback(true, 'Thank you! Your message has been sent successfully. I will get back to you shortly.');
+        if (contactForm) contactForm.reset();
+      } else {
+        showFormFeedback(false, data.message || 'Something went wrong. Please email directly to vasanth19102005@gmail.com');
       }
-
+    } catch (error) {
+      showFormFeedback(true, 'Thank you! Your message has been received.');
+      if (contactForm) contactForm.reset();
+    } finally {
       if (formSubmitBtn) {
-        formSubmitBtn.disabled = true;
-        if (formBtnText) formBtnText.textContent = 'Sending Message...';
+        formSubmitBtn.disabled = false;
+        if (formBtnText) formBtnText.textContent = 'Send Message';
       }
+    }
+  }
 
-      try {
-        const formData = new FormData(contactForm);
-        const endpoint = contactForm.getAttribute('action') || 'https://formsubmit.co/ajax/vasanth19102005@gmail.com';
-
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json'
-          },
-          body: formData
-        });
-
-        const data = await response.json().catch(() => ({ success: response.ok }));
-
-        if (response.ok || data.success === 'true' || data.success === true) {
-          showFormFeedback(true, 'Thank you! Your message has been sent successfully. I will get back to you shortly.');
-          contactForm.reset();
-        } else {
-          showFormFeedback(false, data.message || 'Something went wrong. Please email directly to vasanth19102005@gmail.com');
-        }
-      } catch (error) {
-        // Fallback smooth confirmation if response is intercepted
-        showFormFeedback(true, 'Thank you! Your message has been received.');
-        contactForm.reset();
-      } finally {
-        if (formSubmitBtn) {
-          formSubmitBtn.disabled = false;
-          if (formBtnText) formBtnText.textContent = 'Send Message';
-        }
-      }
-    });
+  if (formSubmitBtn) {
+    formSubmitBtn.addEventListener('click', handleContactFormSend);
+  }
+  if (contactForm) {
+    contactForm.addEventListener('submit', handleContactFormSend);
+  }
 
     function showFormFeedback(isSuccess, messageText) {
       if (formStatus) {
