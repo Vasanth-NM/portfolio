@@ -23,9 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 650);
   }
 
-  // Initial Entrance Gear Spin
-  setTimeout(triggerRefreshFlash, 120);
-
   // Pull-Down-to-Refresh Touch Mechanics (Mobile & Tablet)
   let touchStartY = 0;
   let isPulling = false;
@@ -674,7 +671,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- 8. Dynamic In-Page Contact Form Submission (Zero Page Reload & Zero Scroll Jump) ---
-  const contactForm = document.getElementById('contact-form');
   const formSubmitBtn = document.getElementById('form-submit-btn');
   const formBtnText = document.getElementById('form-btn-text');
   const formStatus = document.getElementById('form-status');
@@ -685,12 +681,18 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
     }
 
-    const name = document.getElementById('form-name')?.value.trim();
-    const email = document.getElementById('form-email')?.value.trim();
-    const message = document.getElementById('form-message')?.value.trim();
+    const nameInput = document.getElementById('form-name');
+    const emailInput = document.getElementById('form-email');
+    const subjectInput = document.getElementById('form-subject');
+    const messageInput = document.getElementById('form-message');
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const subject = subjectInput ? subjectInput.value.trim() : 'Portfolio Contact';
+    const message = messageInput ? messageInput.value.trim() : '';
 
     if (!name || !email || !message) {
-      showFormFeedback(false, 'Please fill in all required fields.');
+      showFormFeedback(false, 'Please fill in your Name, Email, and Message.');
       return;
     }
 
@@ -700,28 +702,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const formData = new FormData(contactForm);
-      const endpoint = contactForm ? (contactForm.getAttribute('action') || 'https://formsubmit.co/ajax/vasanth19102005@gmail.com') : 'https://formsubmit.co/ajax/vasanth19102005@gmail.com';
+      const payload = {
+        name: name,
+        email: email,
+        _subject: subject || 'New Message from Portfolio Website!',
+        message: message
+      };
 
-      const response = await fetch(endpoint, {
+      const response = await fetch('https://formsubmit.co/ajax/vasanth19102005@gmail.com', {
         method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: formData
+        body: JSON.stringify(payload)
       });
 
       const data = await response.json().catch(() => ({ success: response.ok }));
 
       if (response.ok || data.success === 'true' || data.success === true) {
         showFormFeedback(true, 'Thank you! Your message has been sent successfully. I will get back to you shortly.');
-        if (contactForm) contactForm.reset();
+        if (nameInput) nameInput.value = '';
+        if (emailInput) emailInput.value = '';
+        if (subjectInput) subjectInput.value = '';
+        if (messageInput) messageInput.value = '';
       } else {
         showFormFeedback(false, data.message || 'Something went wrong. Please email directly to vasanth19102005@gmail.com');
       }
     } catch (error) {
       showFormFeedback(true, 'Thank you! Your message has been received.');
-      if (contactForm) contactForm.reset();
+      if (nameInput) nameInput.value = '';
+      if (emailInput) emailInput.value = '';
+      if (subjectInput) subjectInput.value = '';
+      if (messageInput) messageInput.value = '';
     } finally {
       if (formSubmitBtn) {
         formSubmitBtn.disabled = false;
@@ -733,11 +746,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (formSubmitBtn) {
     formSubmitBtn.addEventListener('click', handleContactFormSend);
   }
-  if (contactForm) {
-    contactForm.addEventListener('submit', handleContactFormSend);
-  }
 
-    function showFormFeedback(isSuccess, messageText) {
+  function showFormFeedback(isSuccess, messageText) {
       if (formStatus) {
         formStatus.className = isSuccess 
           ? 'block p-3.5 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold text-center shadow-inner'
