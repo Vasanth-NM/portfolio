@@ -748,20 +748,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showFormFeedback(isSuccess, messageText) {
-      if (formStatus) {
-        formStatus.className = isSuccess 
-          ? 'block p-3.5 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold text-center shadow-inner'
-          : 'block p-3.5 rounded-2xl bg-red-500/15 border border-red-500/30 text-red-700 dark:text-red-300 text-xs font-bold text-center shadow-inner';
-        formStatus.innerHTML = `<i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-1.5"></i> ${messageText}`;
-        formStatus.classList.remove('hidden');
+    if (formStatus) {
+      formStatus.className = isSuccess 
+        ? 'block p-3.5 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold text-center shadow-inner'
+        : 'block p-3.5 rounded-2xl bg-red-500/15 border border-red-500/30 text-red-700 dark:text-red-300 text-xs font-bold text-center shadow-inner';
+      formStatus.innerHTML = `<i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-1.5"></i> ${messageText}`;
+      formStatus.classList.remove('hidden');
 
-        setTimeout(() => {
-          formStatus.classList.add('hidden');
-        }, 5000);
-      }
-
-      showToast(isSuccess ? 'Message Sent Successfully!' : 'Could not send message.');
+      setTimeout(() => {
+        formStatus.classList.add('hidden');
+      }, 5000);
     }
+
+    showToast(isSuccess ? 'Message Sent Successfully!' : 'Could not send message.');
   }
 
   // --- 9. Copy to Clipboard Toast ---
