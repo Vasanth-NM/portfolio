@@ -1,0 +1,9 @@
+# Temporary & Cache files
+~$*.*
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+err.txt
+out.txt
